@@ -13,7 +13,7 @@ public class FootFallCsvReader{
 		BufferedReader br = null;
 		String line = "";
 		try {
-			br = new BufferedReader(new FileReader(filename));
+			br = new BufferedReader(new FileReader("../resources/"+filename));
 			String csvfileheader = br.readLine();
 			System.out.println("Sending Header: " + csvfileheader); //sending header Date, time
 			while((line = br.readLine())!=null) {
