@@ -8,12 +8,12 @@ import java.util.List;
 
 public class FootFallCsvReader{
 	
-	public static List<String> ReadFootfalldataLinebyLinefromCsv(String filename) {
+	public static List<String> readFootfalldataLinebyLinefromCsv(String filename) throws IOException {
 		List<String> footfalldata = new ArrayList<String>();
 		BufferedReader br = null;
 		String line = "";
 		try {
-			br = new BufferedReader(new FileReader("../resources/"+filename));
+			br = new BufferedReader(new FileReader("src/main/resources/"+filename));
 			String csvfileheader = br.readLine();
 			System.out.println("Sending Header: " + csvfileheader); //sending header Date, time
 			while((line = br.readLine())!=null) {
@@ -21,7 +21,8 @@ public class FootFallCsvReader{
 			}
 			br.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			throw e;
 		} 
 		return footfalldata;	
 	}

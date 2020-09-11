@@ -4,7 +4,12 @@ import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
-		List<String> footfallrecords = FootFallCsvReader.ReadFootfalldataLinebyLinefromCsv("footfall.csv");
+		try {
+		List<String> footfallrecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("footfall.csv");
 		ConsoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallrecords);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
