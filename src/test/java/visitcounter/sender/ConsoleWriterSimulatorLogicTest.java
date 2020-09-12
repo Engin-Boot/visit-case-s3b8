@@ -10,17 +10,20 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FootFallCsvReaderTest {
+public class ConsoleWriterSimulatorLogicTest {
 	
-	@Test(expected = FileNotFoundException.class)
-	public void whenFileIsNotPresentThenThrowException() throws IOException
+	@Test
+	public void add() throws IOException, InterruptedException
 	{
-		FootFallCsvReader.readFootfalldataLinebyLinefromCsv("missingfile.csv");
+		List<String> records = new ArrayList<>();
+		records.add("2020-01-01,08:10:01");
+		records.add("2020-01-01,08:10:30");	
+		ConsoleWriterSimulatorLogic.sendFootFalldataInbunch(records);
 		
 	}
 	
 	@Test
-	public void whenCsvFileIsPresentThenReturnListOfRecords() throws IOException
+	public void test2() throws IOException
 	{
 		List<String> expectedRecords = new ArrayList<>();
 		expectedRecords.add("2020-01-01,08:10:01");
