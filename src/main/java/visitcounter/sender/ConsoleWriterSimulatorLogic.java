@@ -17,11 +17,11 @@ public class ConsoleWriterSimulatorLogic{
 		}
 
 		public static void sendFootFalldataInbunch(List<String> footfallrecords) throws InterruptedException {
-			int countofdatasent = 0;
-			for(String string : footfallrecords) {
-				System.out.println(string);
-				countofdatasent++;
-				sensorSimulationUsingThread(countofdatasent);
+			int countOfDataSent = 0;
+			for(String record : footfallrecords) {
+				FootFallConsoleWriter.writeFootFallRecordtoConsole(record);
+				countOfDataSent++;
+				sensorSimulationUsingThread(countOfDataSent);
 			}
 		}
 }

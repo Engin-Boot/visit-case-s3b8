@@ -1,6 +1,7 @@
 package visitcounter.sender;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,8 +16,14 @@ public class FootFallCsvReaderTest {
 	@Test(expected = FileNotFoundException.class)
 	public void whenFileIsNotPresentThenThrowException() throws IOException
 	{
-		FootFallCsvReader.readFootfalldataLinebyLinefromCsv("missingfile.csv");
-		
+		FootFallCsvReader.readFootfalldataLinebyLinefromCsv("missingfile.csv");	
+	}
+	
+	@Test
+	public void whenCsvFileIsPresentAndNoDataIsPresentInCsvThenReturnEmptyList() throws IOException
+	{
+		List<String> returnedrecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("emptytest.csv");
+		assertThat(returnedrecords.isEmpty(), equalTo(true));
 	}
 	
 	@Test
@@ -27,12 +34,6 @@ public class FootFallCsvReaderTest {
 		expectedRecords.add("2020-01-01,08:10:30");	
 		
 		List<String> actualRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("test.csv");
-		Assert.assertArrayEquals(expectedRecords.toArray(), actualRecords.toArray());
-		//System.out.println(actualRecords.get(0));
-		
+		Assert.assertArrayEquals(expectedRecords.toArray(), actualRecords.toArray());	
 	}
-	
-	
-	
-
 }

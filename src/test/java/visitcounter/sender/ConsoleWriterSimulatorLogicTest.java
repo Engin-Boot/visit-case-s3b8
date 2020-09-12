@@ -1,8 +1,5 @@
 package visitcounter.sender;
 
-import static org.junit.Assert.assertTrue;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +28,5 @@ public class ConsoleWriterSimulatorLogicTest {
 		
 		List<String> actualRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("test.csv");
 		Assert.assertArrayEquals(expectedRecords.toArray(), actualRecords.toArray());
-		//System.out.println(actualRecords.get(0));
-		
 	}
-	
-	
-	
-
 }

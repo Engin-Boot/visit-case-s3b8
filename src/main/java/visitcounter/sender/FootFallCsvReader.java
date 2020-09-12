@@ -9,21 +9,16 @@ import java.util.List;
 public class FootFallCsvReader{
 	
 	public static List<String> readFootfalldataLinebyLinefromCsv(String filename) throws IOException {
-		List<String> footfalldata = new ArrayList<String>();
-		BufferedReader br = null;
+		List<String> footfallData = new ArrayList<String>();
 		String line = "";
-		try {
-			br = new BufferedReader(new FileReader("src/main/resources/"+filename));
-			String csvfileheader = br.readLine();
-			System.out.println("Sending Header: " + csvfileheader); //sending header Date, time
+		try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/"+filename))) {
+			br.readLine();  //to skip the first row
 			while((line = br.readLine())!=null) {
-				footfalldata.add(line);
+				footfallData.add(line);
 			}
-			br.close();
 		} catch (IOException e) {
-			//e.printStackTrace();
 			throw e;
 		} 
-		return footfalldata;	
+		return footfallData;
 	}
 }
