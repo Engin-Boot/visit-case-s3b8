@@ -107,10 +107,17 @@
           </reportSet>
         </reportSets>
       </plugin>
+      
+      <plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>4.0.4</version>
+				<configuration>
+					<!-- Optional directory to put spotbugs xml report -->
+				</configuration>
+			</plugin>
+      
     </plugins>
   </reporting>
   
 </project>
-
-
-
