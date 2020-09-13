@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FootFallRecordObjectStorer {
-	public static List<FootFallModel> footFallRecords= new ArrayList<>();
+	public static final List<FootFallModel> footFallRecords= new ArrayList<>();
 	
 	public static void storeFootFallRecordAsObject(String record){
 		String [] arrayWithDateTime = Utility.splitDatabyComma(record);
