@@ -2,7 +2,7 @@ package visitcounter.sender;
 
 import java.util.List;
 
-public class ConsoleWriterSimulatorLogic{
+public class ConsoleWriterSimulatorLogic {
 
 	// This function help in simulating a sensor
 		private static void sensorSimulationUsingThread(int countofdatasent) throws InterruptedException {
