@@ -4,19 +4,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Main {
-	
-	private Main() {}
-	
-	public static ResourceBundle rb = ResourceBundle.getBundle("filepath");
-	public static String readPathFromProperties() {	
-		String path = rb.getString("filename");
-		return path;
-	}
-	
+		
 	public static void main(String[] args){
 		
 		try {
-			List<String> footfallRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv(readPathFromProperties());
+			List<String> footfallRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties());
 			ConsoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallRecords);
 		}
 		catch(Exception e) {

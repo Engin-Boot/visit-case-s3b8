@@ -16,13 +16,13 @@ public class FootFallCsvReaderTest {
 	@Test(expected = FileNotFoundException.class)
 	public void whenFileIsNotPresentThenThrowException() throws IOException
 	{
-		FootFallCsvReader.readFootfalldataLinebyLinefromCsv("missingfile.csv");	
+		FootFallCsvReader.readFootfalldataLinebyLinefromCsv("src/test/resources/missingfile.csv");	
 	}
 	
 	@Test
 	public void whenCsvFileIsPresentAndNoDataIsPresentInCsvThenReturnEmptyList() throws IOException
 	{
-		List<String> returnedrecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("emptytest.csv");
+		List<String> returnedrecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("src/test/resources/emptytest.csv");
 		assertThat(returnedrecords.isEmpty(), equalTo(true));
 	}
 	
@@ -33,7 +33,7 @@ public class FootFallCsvReaderTest {
 		expectedRecords.add("2020-01-01,08:10:01");
 		expectedRecords.add("2020-01-01,08:10:30");	
 		
-		List<String> actualRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("test.csv");
+		List<String> actualRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv("src/test/resources/test.csv");
 		Assert.assertArrayEquals(expectedRecords.toArray(), actualRecords.toArray());	
 	}
 }

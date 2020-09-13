@@ -11,7 +11,7 @@ public class FootFallCsvReader{
 	public static List<String> readFootfalldataLinebyLinefromCsv(String filename) throws IOException {
 		List<String> footfallData = new ArrayList<String>();
 		String line = "";
-		try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/"+filename))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
 			br.readLine();  //to skip the first row
 			while((line = br.readLine())!=null) {
 				footfallData.add(line);
