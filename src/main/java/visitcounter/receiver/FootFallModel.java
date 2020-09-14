@@ -11,6 +11,12 @@ public class FootFallModel {
 		this.date = date;
 		this.time = time;
 	}
-	
-	
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
 }
