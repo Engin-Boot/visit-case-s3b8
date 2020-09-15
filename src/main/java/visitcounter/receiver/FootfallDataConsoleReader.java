@@ -19,11 +19,7 @@ public class FootfallDataConsoleReader {
 			e.printStackTrace();
 		} 
 		
-		System.out.println("LLLLLLLL");
 		
-		for(FootFallModel l1: FootFallRecordObjectStorer.getFootFallRecords()) {
-			System.out.println(l1.getDate() + "  " + l1.getTime());
-		}
 		
 		
 		

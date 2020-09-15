@@ -12,6 +12,7 @@ public class FootFallStatisticsCsvWriter {
 	try {
 		writer = new CSVWriter(new FileWriter(path));
 	} catch (IOException e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	return writer;

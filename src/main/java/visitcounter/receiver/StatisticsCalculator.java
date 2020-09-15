@@ -75,7 +75,6 @@ public class StatisticsCalculator {
 		
 		Integer peak_value = 0;
 		String peak_date = "2020/01/01";
-		System.out.println(peak_date +"HHHH");
 		String [] data = null;
 		for (Map.Entry<LocalDate,Integer> record : countFootFallForEveryDate.entrySet()) {
 			if(record.getKey().getMonthValue() == month)
