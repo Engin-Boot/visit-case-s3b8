@@ -74,7 +74,7 @@ public class StatisticsCalculator {
 		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
 		
 		Integer peak_value = 0;
-		String peak_date = "2020/01/01";
+		String peak_date = "2020/01/01";  //initializing with random value
 		String [] data = null;
 		for (Map.Entry<LocalDate,Integer> record : countFootFallForEveryDate.entrySet()) {
 			if(record.getKey().getMonthValue() == month)
@@ -121,10 +121,13 @@ public class StatisticsCalculator {
 		return countNoOfOccurencesOfDaysOfWeek;
 		
 	} 
-	
+
 	private static Map<String,Integer> getMapCountNoOfFootfallsForEveryWorkingHour(List<FootFallModel> footFallRecords){
 		Map<String,Integer> countNoOfFootfallsForEveryWorkingHours = new LinkedHashMap<>();
-		for(int i = 5; i <= 18; i++) {
+		int [] working_hour = Utility.getWorkingHourOFaDay();
+		int opening_time = working_hour[0];
+		int closing_time = working_hour[1];
+		for(int i = opening_time; i <= closing_time; i++) {
 			countNoOfFootfallsForEveryWorkingHours.put(String.valueOf(i), 0);
 		}
 		
@@ -134,24 +137,6 @@ public class StatisticsCalculator {
 		return countNoOfFootfallsForEveryWorkingHours;
 		
 	} 
-	
-//	private static Map<String,Integer> getMapCountNoOfOccurencesOfWorkingHours(List<FootFallModel> footFallRecords){
-//		Map<String,Integer> countNoOfOccurencesOfWorkingHours = new LinkedHashMap<>();
-//		
-//		for(int i = 5; i <= 18; i++) {
-//			countNoOfOccurencesOfWorkingHours.put(String.valueOf(i), 0);
-//		}
-//		String date = ""; 
-//		for(FootFallModel record: footFallRecords) {
-//			if(!date.equals(record.getDate().toString())) {
-//				countNoOfOccurencesOfWorkingHours.merge(record., 1, Integer::sum);
-//				date = record.getDate().toString();
-//			}	
-//		}
-//		return countNoOfOccurencesOfDaysOfWeek;
-//		
-//	} 
-	
-	
+		
 
 }

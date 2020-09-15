@@ -37,4 +37,17 @@ public class Utility {
 		String path = rb.getString(filename);
 		return path;
 	}
+	
+	public static int [] getWorkingHourOFaDay() {
+		int opening_Hour = 5;
+		int closing_Hour = 18;
+		
+		int [] working_hour = new int[2];
+		working_hour[0] = opening_Hour;
+		working_hour[1] = closing_Hour;
+		return working_hour;		
+	}
+	
+	
+
 }

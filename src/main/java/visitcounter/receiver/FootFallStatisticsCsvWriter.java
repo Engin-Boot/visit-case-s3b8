@@ -16,7 +16,6 @@ public class FootFallStatisticsCsvWriter {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
 		writer = new CSVWriter(outputStreamWriter);
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	return writer;
@@ -34,7 +33,6 @@ public class FootFallStatisticsCsvWriter {
 		try {
 			writer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
