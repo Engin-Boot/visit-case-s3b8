@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FootFallRecordObjectStorer {
-	public static final List<FootFallModel> footFallRecords= new ArrayList<>();
+	private static final List<FootFallModel> footFallRecords= new ArrayList<>();
 	
 	public static List<FootFallModel> getFootFallRecords(){
 		return footFallRecords;
