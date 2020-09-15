@@ -29,6 +29,9 @@ public class FootfallDataConsoleReader {
 		FootFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/07,08:03:50");
 		FootFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/07,08:03:50");
 		FootFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/08,08:03:50");
+		FootFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/14,08:03:50");
+		FootFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/21,08:03:50");
+		
 		System.out.println("DONEEE");
 		System.out.println(FootFallRecordObjectStorer.getFootFallRecords().get(0).getDate());
 		System.out.println(FootFallRecordObjectStorer.getFootFallRecords().get(0).getTime());

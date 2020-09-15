@@ -14,70 +14,115 @@ public class StatisticsCalculator {
 	
 	public static void calculateAverageFootfallsPerHourOverDay() throws IOException {
 		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
-		Map<LocalDate,Integer> countFootFallPerDay = getMapCountFootFallsPerDay(footFallRecords);
-		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter();
+		Map<LocalDate,Integer> countFootFallPerDay = getMapCountFootFallsForEveryDate(footFallRecords);
+		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename1"));
 		
-		String [] column_name = {"Date", "Average Foot Fall Per Hour"};
-		writer.writeNext(column_name);
+		String [] column_names = {"Date", "Average Foot Fall Per Hour"};
+		
+		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
 		
 		countFootFallPerDay.forEach((k,v) -> {
 			Double dailyFootfallPerHour = v.doubleValue()/24;
 			String [] data = {k.toString(), dailyFootfallPerHour.toString()};
-			writer.writeNext(data);
+			FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
 		});
 		
-		writer.flush();
+		FootFallStatisticsCsvWriter.executeFlush(writer);
 	}
 	
 	public static void calculateDailyFootfallsOverWeek() throws IOException {
 		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
-		Map<LocalDate,Integer> countFootFallPerDay = getMapCountFootFallsPerDay(footFallRecords);
+		Map<String,Integer> countFootFallPerDayOfWeek = getMapCountFootFallsPerDayOfWeek(footFallRecords);
+		Map<String,Integer> countNoOfOccurencesOfDaysOfWeek = getMapCountNoOfOccurencesOfDaysOfWeek(footFallRecords);
+
+		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename2"));
 		
-		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter();
-		int total_count_in_a_week = 0;
-		for (Map.Entry<LocalDate,Integer> record : countFootFallPerDay.entrySet()) {
-			if(record.getKey().getDayOfMonth() == 8) {
-				break;
-			}
-			total_count_in_a_week += record.getValue();
-		}
-		System.out.println("DailyFootFallOverWeek = "+ (double)total_count_in_a_week/7);
+		String [] column_names = {"Day of Week", "Daily Foot Falls Over Week "};
 		
+		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
+		
+		countFootFallPerDayOfWeek.forEach((k,v) -> {
+			Double dailyFootfallPerDayOfWeek = v.doubleValue()/countNoOfOccurencesOfDaysOfWeek.get(k);
+			String [] data = {k.toString(), dailyFootfallPerDayOfWeek.toString()};
+			FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
+		});
+		
+		FootFallStatisticsCsvWriter.executeFlush(writer);
 	}
+		
 	
 	// Refractor to reduce cyclomatic complaxity of calculatePeakDailyFootfallsInParticularMonth
-	public static int refractor(Map.Entry<LocalDate,Integer> record, int year, int peak_value) {
+	public static String[] getPeakData(Map.Entry<LocalDate,Integer> record, int year, Integer peak_value, String peak_date) {
 		if(record.getKey().getYear() == year) {
 			if(record.getValue() > peak_value) {
 				peak_value = record.getValue();
+				peak_date = record.getKey().toString();
 			}
 		}
-		return peak_value;
+		String [] data = {peak_date, peak_value.toString()};
+		return data;
 	}
 	
 	public static void calculatePeakDailyFootfallsInParticularMonth(int month, int year) {
 		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
-		Map<LocalDate,Integer> countFootFallPerDay = getMapCountFootFallsPerDay(footFallRecords);
+		Map<LocalDate,Integer> countFootFallForEveryDate = getMapCountFootFallsForEveryDate(footFallRecords);
 		
-		int peak_value = 0;
-		for (Map.Entry<LocalDate,Integer> record : countFootFallPerDay.entrySet()) {
+		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename3"));
+		
+		String [] column_names = {"Date", "Peak FootFall for current month"};
+		
+		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
+		
+		Integer peak_value = 0;
+		String peak_date = "2020/01/01";
+		System.out.println(peak_date +"HHHH");
+		String [] data = null;
+		for (Map.Entry<LocalDate,Integer> record : countFootFallForEveryDate.entrySet()) {
 			if(record.getKey().getMonthValue() == month)
 			{
-				peak_value = refractor(record, year, peak_value);
+				data = getPeakData(record, year, peak_value, peak_date);
+				peak_value = Integer.parseInt(data[1]);
+				peak_date = data[0];
 			}
 		}
-		System.out.println("Peak Daily footfalls for month="+ month+ " is "+ peak_value);
+		FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
+		FootFallStatisticsCsvWriter.executeFlush(writer);
+		
 		
 	}
 	
 	
-	public static Map<LocalDate,Integer> getMapCountFootFallsPerDay(List<FootFallModel> footFallRecords){
-		Map<LocalDate,Integer> countFootFallPerDay = new LinkedHashMap<>();
+	private static Map<LocalDate,Integer> getMapCountFootFallsForEveryDate(List<FootFallModel> footFallRecords){
+		Map<LocalDate,Integer> countFootFallForEveryDate = new LinkedHashMap<>();
 		for(FootFallModel record: footFallRecords) {
-			countFootFallPerDay.merge(record.getDate(), 1, Integer::sum);
+			countFootFallForEveryDate.merge(record.getDate(), 1, Integer::sum);
+		}
+		return countFootFallForEveryDate;
+		
+	}
+	
+	private static Map<String,Integer> getMapCountFootFallsPerDayOfWeek(List<FootFallModel> footFallRecords){
+		Map<String,Integer> countFootFallPerDay = new LinkedHashMap<>();
+		for(FootFallModel record: footFallRecords) {
+			countFootFallPerDay.merge(record.getDate().getDayOfWeek().toString(), 1, Integer::sum);
 		}
 		return countFootFallPerDay;
 		
 	}
+	
+	private static Map<String,Integer> getMapCountNoOfOccurencesOfDaysOfWeek(List<FootFallModel> footFallRecords){
+		Map<String,Integer> countNoOfOccurencesOfDaysOfWeek= new LinkedHashMap<>();
+		String date = ""; 
+		for(FootFallModel record: footFallRecords) {
+			if(!date.equals(record.getDate().toString())) {
+				countNoOfOccurencesOfDaysOfWeek.merge(record.getDate().getDayOfWeek().toString(), 1, Integer::sum);
+				date = record.getDate().toString();
+			}	
+		}
+		return countNoOfOccurencesOfDaysOfWeek;
+		
+	} 
+	
+	
 
 }

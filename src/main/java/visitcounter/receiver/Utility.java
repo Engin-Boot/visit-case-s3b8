@@ -2,8 +2,11 @@ package visitcounter.receiver;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 public class Utility {
+	
+	public static final ResourceBundle rb = ResourceBundle.getBundle("outputpaths");
 	
 	public static String[] splitDatabyComma(String record) {
 		String splitted_Record[] = record.split(",");
@@ -27,5 +30,11 @@ public class Utility {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
 		LocalTime time = LocalTime.parse(string_time, format);
 		return time;
+	}
+	
+	
+	public static String getCsvOutputFilePathFromProperties(String filename) {	
+		String path = rb.getString(filename);
+		return path;
 	}
 }
