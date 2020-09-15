@@ -14,16 +14,16 @@ public class StatisticsCalculator {
 	
 	public static void calculateAverageFootfallsPerHourOverDay() throws IOException {
 		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
-		Map<LocalDate,Integer> countFootFallPerDay = getMapCountFootFallsForEveryDate(footFallRecords);
+		Map<String,Integer> countFootFallForEveryWorkingHour = getMapCountNoOfFootfallsForEveryWorkingHour(footFallRecords);
 		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename1"));
 		
-		String [] column_names = {"Date", "Average Foot Fall Per Hour"};
+		String [] column_names = {"Working Hour", "Average Foot Fall Per Hour"};
 		
 		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
 		
-		countFootFallPerDay.forEach((k,v) -> {
-			Double dailyFootfallPerHour = v.doubleValue()/24;
-			String [] data = {k.toString(), dailyFootfallPerHour.toString()};
+		countFootFallForEveryWorkingHour.forEach((k,v) -> {
+			Double dailyFootfallPerHour = v.doubleValue()/30;
+			String [] data = {k, dailyFootfallPerHour.toString()};
 			FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
 		});
 		
@@ -111,7 +111,7 @@ public class StatisticsCalculator {
 	}
 	
 	private static Map<String,Integer> getMapCountNoOfOccurencesOfDaysOfWeek(List<FootFallModel> footFallRecords){
-		Map<String,Integer> countNoOfOccurencesOfDaysOfWeek= new LinkedHashMap<>();
+		Map<String,Integer> countNoOfOccurencesOfDaysOfWeek = new LinkedHashMap<>();
 		String date = ""; 
 		for(FootFallModel record: footFallRecords) {
 			if(!date.equals(record.getDate().toString())) {
@@ -122,6 +122,36 @@ public class StatisticsCalculator {
 		return countNoOfOccurencesOfDaysOfWeek;
 		
 	} 
+	
+	private static Map<String,Integer> getMapCountNoOfFootfallsForEveryWorkingHour(List<FootFallModel> footFallRecords){
+		Map<String,Integer> countNoOfFootfallsForEveryWorkingHours = new LinkedHashMap<>();
+		for(int i = 5; i <= 18; i++) {
+			countNoOfFootfallsForEveryWorkingHours.put(String.valueOf(i), 0);
+		}
+		
+		for(FootFallModel record: footFallRecords) {
+			countNoOfFootfallsForEveryWorkingHours.merge(String.valueOf(record.getTime().getHour()), 1, Integer::sum);
+		}
+		return countNoOfFootfallsForEveryWorkingHours;
+		
+	} 
+	
+//	private static Map<String,Integer> getMapCountNoOfOccurencesOfWorkingHours(List<FootFallModel> footFallRecords){
+//		Map<String,Integer> countNoOfOccurencesOfWorkingHours = new LinkedHashMap<>();
+//		
+//		for(int i = 5; i <= 18; i++) {
+//			countNoOfOccurencesOfWorkingHours.put(String.valueOf(i), 0);
+//		}
+//		String date = ""; 
+//		for(FootFallModel record: footFallRecords) {
+//			if(!date.equals(record.getDate().toString())) {
+//				countNoOfOccurencesOfWorkingHours.merge(record., 1, Integer::sum);
+//				date = record.getDate().toString();
+//			}	
+//		}
+//		return countNoOfOccurencesOfDaysOfWeek;
+//		
+//	} 
 	
 	
 

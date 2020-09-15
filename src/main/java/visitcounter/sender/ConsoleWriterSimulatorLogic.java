@@ -8,7 +8,7 @@ public class ConsoleWriterSimulatorLogic {
 		private static void sensorSimulationUsingThread(int countofdatasent) throws InterruptedException {
 			if(countofdatasent%10 == 0) {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				throw e;

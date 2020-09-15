@@ -17,7 +17,9 @@ public class Main {
 		//StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
 		//StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020);
 		
-		StatisticsCalculator.calculateDailyFootfallsOverWeek();
+		//StatisticsCalculator.calculateDailyFootfallsOverWeek();
+		
+		StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
 
 		
 	}
