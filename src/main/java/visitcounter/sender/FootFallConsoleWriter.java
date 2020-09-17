@@ -1,7 +1,8 @@
 package visitcounter.sender;
 
-public class FootFallConsoleWriter {
-	public static void writeFootFallRecordtoConsole(String record) {
+public class FootFallConsoleWriter implements IFootFallConsoleWriter{
+	public String writeFootFallRecordtoConsole(String record) {
 		System.out.println(record);
+		return record;
 	}
 }

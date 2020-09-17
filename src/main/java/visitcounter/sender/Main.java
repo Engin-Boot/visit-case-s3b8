@@ -7,11 +7,17 @@ public class Main {
 	public static void main(String[] args){
 		
 		try {
-			List<String> footfallRecords = FootFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties());
-			ConsoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallRecords);
+			FootFallCsvReader footFallCsvReader = new FootFallCsvReader();
+			
+			List<String> footfallRecords = footFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties());
+			
+			IFootFallConsoleWriter consoleWriter = new FootFallConsoleWriter();
+			ConsoleWriterSimulatorLogic consoleWriterSimulatorLogic = new ConsoleWriterSimulatorLogic(consoleWriter);
+			consoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallRecords);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 }

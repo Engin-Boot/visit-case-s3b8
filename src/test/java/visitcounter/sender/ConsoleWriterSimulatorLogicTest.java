@@ -1,24 +1,35 @@
 package visitcounter.sender;
 
-import java.io.IOException;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ConsoleWriterSimulatorLogicTest {
 	
+	@Mock
+	FootFallConsoleWriter footFallConsoleWriter;
+	
 //	@Test
-//	public void add() throws IOException, InterruptedException
+//	public void add() throws InterruptedException
 //	{
-//		List<String> records = new ArrayList<>();
-//		records.add("2020-01-01,08:10:01");
-//		records.add("2020-01-01,08:10:30");	
-//		ConsoleWriterSimulatorLogic.sendFootFalldataInbunch(records);
+//		List<String> footFallRecords = new ArrayList<String>();
+//		footFallRecords.add("testrecord1");
+//		footFallRecords.add("testrecord2");
+//		ConsoleWriterSimulatorLogic.sendFootFalldataInbunch(footFallRecords);
+//		verify(footFallConsoleWriter, times(1)).writeFootFallRecordtoConsole(anyString());
+//		
 //		
 //	}
-//	
+	
 //	@Test
 //	public void test2() throws IOException
 //	{
