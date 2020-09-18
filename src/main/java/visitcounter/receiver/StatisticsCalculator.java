@@ -10,42 +10,41 @@ import com.opencsv.CSVWriter;
 
 public class StatisticsCalculator {
 	
-	public static void calculateAverageFootfallsPerHourOverDay() throws IOException {
-		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
+	public static void calculateAverageFootfallsPerHourOverDay(List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
+		//List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
 		Map<String,Integer> countFootFallForEveryWorkingHour = getMapCountNoOfFootfallsForEveryWorkingHour(footFallRecords);
-		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename1"));
+		footFallCsvWriter.createWriter(Utility.getCsvOutputFilePathFromProperties("filename1"));
 		
 		String [] column_names = {"Working Hour", "Average Foot Fall Per Hour"};
 		
-		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
+		footFallCsvWriter.writeColumnNamesToCsv(column_names);
 		
 		countFootFallForEveryWorkingHour.forEach((k,v) -> {
 			Double dailyFootfallPerHour = v.doubleValue()/30;
 			String [] data = {k, dailyFootfallPerHour.toString()};
-			FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
+			footFallCsvWriter.writeRecordToCsv(data);
 		});
 		
-		FootFallStatisticsCsvWriter.executeFlush(writer);
+		footFallCsvWriter.closeWriter();
 	}
 	
-	public static void calculateDailyFootfallsOverWeek() throws IOException {
-		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
+	public static void calculateDailyFootfallsOverWeek(List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
 		Map<String,Integer> countFootFallPerDayOfWeek = getMapCountFootFallsPerDayOfWeek(footFallRecords);
 		Map<String,Integer> countNoOfOccurencesOfDaysOfWeek = getMapCountNoOfOccurencesOfDaysOfWeek(footFallRecords);
 
-		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename2"));
+		footFallCsvWriter.createWriter(Utility.getCsvOutputFilePathFromProperties("filename2"));
 		
 		String [] column_names = {"Day of Week", "Daily Foot Falls Over Week "};
 		
-		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
+		footFallCsvWriter.writeColumnNamesToCsv(column_names);
 		
 		countFootFallPerDayOfWeek.forEach((k,v) -> {
 			Double dailyFootfallPerDayOfWeek = v.doubleValue()/countNoOfOccurencesOfDaysOfWeek.get(k);
 			String [] data = {k.toString(), dailyFootfallPerDayOfWeek.toString()};
-			FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
+			footFallCsvWriter.writeRecordToCsv(data);
 		});
 		
-		FootFallStatisticsCsvWriter.executeFlush(writer);
+		footFallCsvWriter.closeWriter();
 	}
 		
 	
@@ -61,15 +60,14 @@ public class StatisticsCalculator {
 		return data;
 	}
 	
-	public static void calculatePeakDailyFootfallsInParticularMonth(int month, int year) {
-		List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
+	public static void calculatePeakDailyFootfallsInParticularMonth(int month, int year, List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
 		Map<LocalDate,Integer> countFootFallForEveryDate = getMapCountFootFallsForEveryDate(footFallRecords);
 		
-		CSVWriter writer = FootFallStatisticsCsvWriter.getWriter(Utility.getCsvOutputFilePathFromProperties("filename3"));
+		footFallCsvWriter.createWriter(Utility.getCsvOutputFilePathFromProperties("filename3"));
 		
 		String [] column_names = {"Date", "Peak FootFall for current month"};
 		
-		FootFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names, writer);
+		footFallCsvWriter.writeColumnNamesToCsv(column_names);
 		
 		Integer peak_value = 0;
 		String peak_date = "2020/01/01";  //initializing with random value
@@ -82,10 +80,8 @@ public class StatisticsCalculator {
 				peak_date = data[0];
 			}
 		}
-		FootFallStatisticsCsvWriter.writeRecordToCsv(data, writer);
-		FootFallStatisticsCsvWriter.executeFlush(writer);
-		
-		
+		footFallCsvWriter.writeRecordToCsv(data);
+		footFallCsvWriter.closeWriter();	
 	}
 	
 	

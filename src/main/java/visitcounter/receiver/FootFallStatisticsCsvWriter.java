@@ -7,32 +7,40 @@ import java.nio.charset.StandardCharsets;
 
 import com.opencsv.CSVWriter;
 
-public class FootFallStatisticsCsvWriter {
+public class FootFallStatisticsCsvWriter implements IFootFallCsvWriter {
 	
-	public static CSVWriter getWriter(String path) {
-	CSVWriter writer = null;
-	try {
-		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
-		writer = new CSVWriter(outputStreamWriter);
-	} catch (IOException e) {
-		e.printStackTrace();
+	private CSVWriter writer;
+	
+	public CSVWriter getWriter() {
+		return writer;
 	}
-	return writer;
+
+	@Override
+	public void createWriter(String path) throws IOException {
+		try {
+			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
+			this.writer = new CSVWriter(outputStreamWriter);
+		} catch (IOException e) {
+			throw e;
+		}
 	}
 	
-	public static void writeColumnNamesToCsv(String[] column_names, CSVWriter writer) {
+	@Override
+	public void writeColumnNamesToCsv(String[] column_names) {
 		writer.writeNext(column_names);
 	}
 	
-	public static void writeRecordToCsv(String[] record, CSVWriter writer) {
+	@Override
+	public void writeRecordToCsv(String[] record) {
 		writer.writeNext(record);
 	}
 	
-	public static void executeFlush(CSVWriter writer){
+	@Override
+	public void closeWriter() throws IOException{
 		try {
-			writer.flush();
+			writer.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	

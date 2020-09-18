@@ -1,23 +1,33 @@
 package visitcounter.receiver;
 
-import java.io.IOException;
-
 public class Main {
 	
-	public static void main(String [] args) throws IOException {
-		//System.out.println(Utility.convertStringToDate("2020/01/02"));
-		//System.out.println(Utility.convertStringToTime("08:03:50"));
+	public static void main(String [] args){
 		
-		FootfallDataConsoleReader.readFootfalldataLinebyLineFromConsole();
-		//StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
-		//StatisticsCalculator.calculateDailyFootfallsOverWeek();
-		
-		//StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
-		StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020);
-		
-		StatisticsCalculator.calculateDailyFootfallsOverWeek();
-		
-		StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
+		try {
+			//System.out.println(Utility.convertStringToDate("2020/01/02"));
+			//System.out.println(Utility.convertStringToTime("08:03:50"));
+			
+			FootfallDataConsoleReader consoleReader = new FootfallDataConsoleReader();
+			FootFallRecordObjectStorer footFallRecordObjectStorer = new FootFallRecordObjectStorer();
+			consoleReader.readFootfalldataLinebyLineFromConsole(footFallRecordObjectStorer);
+			//StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
+			//StatisticsCalculator.calculateDailyFootfallsOverWeek();
+			
+			//StatisticsCalculator.calculateAverageFootfallsPerHourOverDay();
+			//StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020);
+			
+			//StatisticsCalculator.calculateDailyFootfallsOverWeek();
+			FootFallStatisticsCsvWriter csvWriter = new FootFallStatisticsCsvWriter();
+			StatisticsCalculator.calculateAverageFootfallsPerHourOverDay(footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
+			
+			StatisticsCalculator.calculateDailyFootfallsOverWeek(footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
+			StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020, footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		
 	}
