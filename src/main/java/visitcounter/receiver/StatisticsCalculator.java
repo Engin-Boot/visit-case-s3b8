@@ -48,12 +48,10 @@ public class StatisticsCalculator {
 	
 	// Refractor to reduce cyclomatic complaxity of calculatePeakDailyFootfallsInParticularMonth
 	private static String[] getPeakData(Map.Entry<LocalDate,Integer> record, int year, Integer peak_value, String peak_date) {
-		if(record.getKey().getYear() == year) {
-			if(record.getValue() > peak_value) {
+		if(record.getKey().getYear() == year && record.getValue() > peak_value) {
 				peak_value = record.getValue();
 				peak_date = record.getKey().toString();
 			}
-		}
 		String [] data = {peak_date, peak_value.toString()};
 		return data;
 	}
