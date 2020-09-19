@@ -2,11 +2,17 @@ package visitcounter.sender;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Main {
+	
+	static final Logger logger = LogManager.getLogger(Main.class);
 		
 	public static void main(String[] args){
 		
 		try {
+			
 			FootFallCsvReader footFallCsvReader = new FootFallCsvReader();
 			
 			List<String> footfallRecords = footFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties("filename"));
@@ -16,7 +22,7 @@ public class Main {
 			consoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallRecords);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			logger.catching(e);
 			System.exit(1);
 		}
 	}

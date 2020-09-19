@@ -129,6 +129,7 @@ public class StatisticsCalculator {
 		}
 		
 		for(FootFallModel record: footFallRecords) {
+			
 			countNoOfFootfallsForEveryWorkingHours.merge(String.valueOf(record.getTime().getHour()), 1, Integer::sum);
 		}
 		return countNoOfFootfallsForEveryWorkingHours;

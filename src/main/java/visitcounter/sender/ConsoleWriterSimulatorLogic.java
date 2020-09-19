@@ -17,7 +17,6 @@ public class ConsoleWriterSimulatorLogic {
 		try {
 			Thread.sleep(2);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
 			throw e;
 		}
 	  }
