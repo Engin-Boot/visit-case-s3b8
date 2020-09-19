@@ -15,6 +15,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -38,8 +39,8 @@ public class StatisticsCalculatorTest {
 		
 		StatisticsCalculator.calculateAverageFootfallsPerHourOverDay(listRecords, writer);
 		verify(writer, times(1)).createWriter(argumentCaptorFilePath.capture());
-		verify(writer, times(1)).writeColumnNamesToCsv(any());
-		verify(writer, atLeastOnce()).writeRecordToCsv(any());
+		verify(writer, times(1)).writeColumnNamesToCsv(Matchers.<String>anyVararg());
+		verify(writer, atLeastOnce()).writeRecordToCsv(Matchers.<String>anyVararg());
 		verify(writer, times(1)).closeWriter();
 		
 		Assert.assertEquals("src/test/resources/test1.csv", argumentCaptorFilePath.getValue());
@@ -56,8 +57,8 @@ public class StatisticsCalculatorTest {
 		
 		StatisticsCalculator.calculateDailyFootfallsOverWeek(listRecords, writer);
 		verify(writer, times(1)).createWriter(argumentCaptorFilePath.capture());
-		verify(writer, times(1)).writeColumnNamesToCsv(any());
-		verify(writer, atLeastOnce()).writeRecordToCsv(any());
+		verify(writer, times(1)).writeColumnNamesToCsv(Matchers.<String>anyVararg());
+		verify(writer, atLeastOnce()).writeRecordToCsv(Matchers.<String>anyVararg());
 		verify(writer, times(1)).closeWriter();
 		
 		Assert.assertEquals("src/test/resources/test2.csv", argumentCaptorFilePath.getValue());
@@ -75,8 +76,8 @@ public class StatisticsCalculatorTest {
 		
 		StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020, listRecords, writer);
 		verify(writer, times(1)).createWriter(argumentCaptorFilePath.capture());
-		verify(writer, times(1)).writeColumnNamesToCsv(any());
-		verify(writer, times(1)).writeRecordToCsv(any());
+		verify(writer, times(1)).writeColumnNamesToCsv(Matchers.<String>anyVararg());
+		verify(writer, times(1)).writeRecordToCsv(Matchers.<String>anyVararg());
 		verify(writer, times(1)).closeWriter();
 		
 		Assert.assertEquals("src/test/resources/test3.csv", argumentCaptorFilePath.getValue());
@@ -93,8 +94,8 @@ public class StatisticsCalculatorTest {
 		
 		StatisticsCalculator.calculatePeakDailyFootFallsInLastMonth(listRecords, writer);
 		verify(writer, times(1)).createWriter(argumentCaptorFilePath.capture());
-		verify(writer, times(1)).writeColumnNamesToCsv(any());
-		verify(writer, times(1)).writeRecordToCsv(any());
+		verify(writer, times(1)).writeColumnNamesToCsv(Matchers.<String>anyVararg());
+		verify(writer, times(1)).writeRecordToCsv(Matchers.<String>anyVararg());
 		verify(writer, times(1)).closeWriter();
 		
 		Assert.assertEquals("src/test/resources/test3.csv", argumentCaptorFilePath.getValue());
