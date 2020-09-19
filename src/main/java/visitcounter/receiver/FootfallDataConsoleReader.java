@@ -18,7 +18,7 @@ public class FootfallDataConsoleReader {
 			throw e;
 		} 
 		
-	
+//	
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/01,08:03:50");
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/02,08:03:50");
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/02,08:03:50");
@@ -36,7 +36,7 @@ public class FootfallDataConsoleReader {
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/21,11:03:50");
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/21,16:03:50");
 //		
-//		System.out.println("DONEEE");
+//		System.out.println("DONEEE1");
 		//System.out.println(FootFallRecordObjectStorer.getFootFallRecords().get(0).getDate());
 		//System.out.println(FootFallRecordObjectStorer.getFootFallRecords().get(0).getTime());		
 	}
