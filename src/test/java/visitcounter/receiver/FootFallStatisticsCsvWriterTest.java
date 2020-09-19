@@ -1,29 +1,20 @@
 package visitcounter.receiver;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.opencsv.CSVWriter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FootFallStatisticsCsvWriterTest {
 	
-	@Mock
-	CSVWriter writer;
 
 	
 	@Test
-	public void xx() throws IOException
+	public void whenCsvWriterIsCreatedThenThrowNoException() throws IOException
 	{
 		String path = "src/test/resources/test1.csv";
 		FootFallStatisticsCsvWriter footFallStatisticsCsvWriter = new FootFallStatisticsCsvWriter();
@@ -32,23 +23,29 @@ public class FootFallStatisticsCsvWriterTest {
 	}
 	
 	@Test(expected = IOException.class)
-	public void xx1() throws IOException
+	public void whenCsvWriterIsCreatedWithInvalidPathThenThrowException() throws IOException
 	{
 		String invalid_path = "[invalid_path]/invalid";
 		FootFallStatisticsCsvWriter footFallStatisticsCsvWriter = new FootFallStatisticsCsvWriter();
 		footFallStatisticsCsvWriter.createWriter(invalid_path);
 	}
 	
-//	@Test
-//	public void xx2() throws IOException
-//	{
-//		String path = "src/test/resources/test1.csv";
-//		FootFallStatisticsCsvWriter footFallStatisticsCsvWriter = new FootFallStatisticsCsvWriter();
-//		footFallStatisticsCsvWriter.createWriter(path);
-//		
-//		verify(writer, times(1)).writeNext(any());
-//		//Assert.assertNotNull(footFallStatisticsCsvWriter.getWriter());
-//	}
+	@Test
+	public void whenDataisWrittenToCsvFileThenFileShouldNotBeEmpty() throws IOException
+	{
+		String column_names[] = {"Column1","Column2"};
+		String record[] = {"2020-01-01","10:00:00"};
+		String path = "src/test/resources/test1.csv";
+		FootFallStatisticsCsvWriter footFallStatisticsCsvWriter = new FootFallStatisticsCsvWriter();
+		footFallStatisticsCsvWriter.createWriter(path);
+		footFallStatisticsCsvWriter.writeColumnNamesToCsv(column_names);
+		footFallStatisticsCsvWriter.writeRecordToCsv(record);
+		footFallStatisticsCsvWriter.closeWriter();
+		
+		File file = new File("src/test/resources/test1.csv");
+		Assert.assertTrue(file.length()>0);
+		
+	}
 	
 
 }

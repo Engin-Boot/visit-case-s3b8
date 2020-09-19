@@ -49,7 +49,7 @@ public class StatisticsCalculator {
 		
 	
 	// Refractor to reduce cyclomatic complaxity of calculatePeakDailyFootfallsInParticularMonth
-	public static String[] getPeakData(Map.Entry<LocalDate,Integer> record, int year, Integer peak_value, String peak_date) {
+	private static String[] getPeakData(Map.Entry<LocalDate,Integer> record, int year, Integer peak_value, String peak_date) {
 		if(record.getKey().getYear() == year) {
 			if(record.getValue() > peak_value) {
 				peak_value = record.getValue();
@@ -82,6 +82,12 @@ public class StatisticsCalculator {
 		}
 		footFallCsvWriter.writeRecordToCsv(data);
 		footFallCsvWriter.closeWriter();	
+	}
+	
+	public static void calculatePeakDailyFootFallsInLastMonth(List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
+		int[] last_month_with_year = getLastMonthWithYear(footFallRecords);
+		calculatePeakDailyFootfallsInParticularMonth(last_month_with_year[0], last_month_with_year[1], footFallRecords, footFallCsvWriter);
+		
 	}
 	
 	
@@ -131,6 +137,15 @@ public class StatisticsCalculator {
 		return countNoOfFootfallsForEveryWorkingHours;
 		
 	} 
+	
+	private static int[] getLastMonthWithYear(List<FootFallModel> footFallRecords) {
+		FootFallModel last_record = footFallRecords.get(footFallRecords.size()-1);
+		int last_month_with_year[] = new int[2];
+		last_month_with_year[0] = last_record.getDate().getMonthValue();
+		last_month_with_year[1] = last_record.getDate().getYear();
+		
+		return last_month_with_year;
+	}
 		
 
 }

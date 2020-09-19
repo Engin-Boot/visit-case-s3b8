@@ -9,7 +9,7 @@ import org.junit.Test;
 public class FootFallRecordObjectStorerTest {
 	
 	@Test
-	public void whenValidFootFallRecordStoredThenNoException()
+	public void whenValidFootFallRecordStoredThenNoException() throws Exception
 	{
 		String record_one = "2020/01/01,10:00:05";
 		String record_two = "2020/01/02,11:10:05";
@@ -21,9 +21,17 @@ public class FootFallRecordObjectStorerTest {
 	}
 	
 	@Test(expected = DateTimeParseException.class)
-	public void whenFootFallRecordStoredWithInvalidDateTimeFormatThenThrowException()
+	public void whenFootFallRecordStoredWithInvalidDateTimeFormatThenThrowException() throws Exception
 	{
 		String record_one = "2020-01/01,10:00:05"; //invalid record as format is not correct
+		FootFallRecordObjectStorer footFallRecordObjectStorer = new FootFallRecordObjectStorer();
+		footFallRecordObjectStorer.storeFootFallRecordAsObject(record_one);
+	}
+	
+	@Test(expected = Exception.class)
+	public void whenFootFallRecordStoredWithNoCommaSeperatorThenThrowException() throws Exception
+	{
+		String record_one = "2020-01/0110:00:05"; //invalid record as format is not correct
 		FootFallRecordObjectStorer footFallRecordObjectStorer = new FootFallRecordObjectStorer();
 		footFallRecordObjectStorer.storeFootFallRecordAsObject(record_one);
 	}

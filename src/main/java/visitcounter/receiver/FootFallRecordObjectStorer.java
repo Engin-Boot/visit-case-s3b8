@@ -12,12 +12,12 @@ public class FootFallRecordObjectStorer {
 		return footFallRecords;
 	}
 	
-	public void storeFootFallRecordAsObject(String record){
+	public void storeFootFallRecordAsObject(String record) throws Exception{
 		try {
 			String [] arrayWithDateTime = Utility.splitDatabyComma(record);
 			footFallRecords.add(new FootFallModel(Utility.convertStringToDate(arrayWithDateTime[0]), Utility.convertStringToTime(arrayWithDateTime[1])));
 		} 
-		catch(DateTimeParseException e) {
+		catch(DateTimeParseException | ArrayIndexOutOfBoundsException e) {
 			throw e;
 		}
 	}

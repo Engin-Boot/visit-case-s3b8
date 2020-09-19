@@ -22,13 +22,12 @@ public class Main {
 			StatisticsCalculator.calculateAverageFootfallsPerHourOverDay(footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
 			
 			StatisticsCalculator.calculateDailyFootfallsOverWeek(footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
-			StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020, footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
+			StatisticsCalculator.calculatePeakDailyFootFallsInLastMonth(footFallRecordObjectStorer.getFootFallRecords(), csvWriter);
 			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 
-		
 	}
 }

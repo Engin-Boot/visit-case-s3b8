@@ -8,9 +8,14 @@ public class Utility {
 	
 	public static final ResourceBundle rb = ResourceBundle.getBundle("outputpaths");
 	
-	public static String[] splitDatabyComma(String record) {
+	public static String[] splitDatabyComma(String record)throws Exception {
 		String splitted_Record[] = record.split(",");
-		return splitted_Record;
+		if(splitted_Record.length == 2) {
+			return splitted_Record;
+		}
+		else {
+			throw new Exception("Splitted array record does not contain 2 entries");
+		}
 	}
 
 	public static LocalDate convertStringToDate(String string_date) {
@@ -21,10 +26,10 @@ public class Utility {
 
 	}
 
-	public static LocalTime getTimeFromString(String string, DateTimeFormatter format) {
-		LocalTime date = LocalTime.parse(string, format);
-		return date;
-	}
+//	public static LocalTime getTimeFromString(String string, DateTimeFormatter format) {
+//		LocalTime date = LocalTime.parse(string, format);
+//		return date;
+//	}
 
 	public static LocalTime convertStringToTime(String string_time) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -48,6 +53,4 @@ public class Utility {
 		return working_hour;		
 	}
 	
-	
-
 }
