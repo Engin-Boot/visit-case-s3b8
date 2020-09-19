@@ -3,8 +3,6 @@ package visitcounter.receiver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import visitcounter.receiver.Main;
-
 public class Main {
 	
 	static final Logger logger = LogManager.getLogger(Main.class);
