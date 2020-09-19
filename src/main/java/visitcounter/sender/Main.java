@@ -22,7 +22,7 @@ public class Main {
 			consoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallRecords);
 		}
 		catch(Exception e) {
-			logger.catching(e);
+			logger.error("", e);
 			System.exit(1);
 		}
 	}
