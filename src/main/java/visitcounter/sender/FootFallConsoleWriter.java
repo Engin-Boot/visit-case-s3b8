@@ -1,10 +1,11 @@
 package visitcounter.sender;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FootFallConsoleWriter implements IFootFallConsoleWriter{
 	
-	static final Logger logger = Logger.getLogger(FootFallConsoleWriter.class);
+	static final Logger logger = LogManager.getLogger(FootFallConsoleWriter.class);
 	
 	@Override
 	public String writeFootFallRecordtoConsole(String record) {
