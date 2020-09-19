@@ -17,7 +17,7 @@ public class FootfallDataConsoleReader {
 			throw e;
 		} 
 		
-//	
+	
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/01,08:03:50");
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/02,08:03:50");
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/02,08:03:50");

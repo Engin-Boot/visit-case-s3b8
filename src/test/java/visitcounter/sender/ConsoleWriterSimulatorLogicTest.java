@@ -44,7 +44,7 @@ public class ConsoleWriterSimulatorLogicTest {
 
 		int index = 0;
 		for(String footfallRecord: footFallRecords) {
-			assertEquals(footfallRecord, capturedRecords.get(index++));
+			assertEquals("Asserting record",footfallRecord, capturedRecords.get(index++));
 		}
 	}
 	

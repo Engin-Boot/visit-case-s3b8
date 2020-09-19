@@ -24,7 +24,7 @@ public class FootFallCsvReaderTest {
 	{
 		FootFallCsvReader reader = new FootFallCsvReader();
 		List<String> returnedrecords = reader.readFootfalldataLinebyLinefromCsv("src/test/resources/emptytest.csv");
-		assertThat(returnedrecords.isEmpty(), equalTo(true));
+		assertThat("asserting record is empty",returnedrecords.isEmpty(), equalTo(true));
 	}
 	
 	@Test

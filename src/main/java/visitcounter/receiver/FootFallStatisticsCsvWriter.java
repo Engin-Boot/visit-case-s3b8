@@ -26,12 +26,12 @@ public class FootFallStatisticsCsvWriter implements IFootFallCsvWriter {
 	}
 	
 	@Override
-	public void writeColumnNamesToCsv(String[] column_names) {
+	public void writeColumnNamesToCsv(String... column_names) {
 		writer.writeNext(column_names);
 	}
 	
 	@Override
-	public void writeRecordToCsv(String[] record) {
+	public void writeRecordToCsv(String... record) {
 		writer.writeNext(record);
 	}
 	

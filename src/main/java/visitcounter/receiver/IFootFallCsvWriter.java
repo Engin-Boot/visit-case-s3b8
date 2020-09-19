@@ -7,10 +7,10 @@ public interface IFootFallCsvWriter {
 	 void createWriter(String path) throws IOException;
 		
 		
-	 void writeColumnNamesToCsv(String[] column_names);
+	 void writeColumnNamesToCsv(String... column_names);
 	
 	
-	 void writeRecordToCsv(String[] record);
+	 void writeRecordToCsv(String... record);
 	
 	
 	 void closeWriter() throws IOException;

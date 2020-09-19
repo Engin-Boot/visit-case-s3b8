@@ -47,12 +47,12 @@ public class StatisticsCalculator {
 		
 	
 	// Refractor to reduce cyclomatic complaxity of calculatePeakDailyFootfallsInParticularMonth
-	private static String[] getPeakData(Map.Entry<LocalDate,Integer> record, int year, Integer peak_value, String peak_date) {
+	private static String[] getPeakData(Map.Entry<LocalDate,Integer> record, int year, String peak_date, Integer peak_value) {
+		String[] data = {peak_date, peak_value.toString()};
 		if(record.getKey().getYear() == year && record.getValue() > peak_value) {
-				peak_value = record.getValue();
-				peak_date = record.getKey().toString();
+				data[0] = record.getKey().toString();
+				data[1] = record.getValue().toString();
 			}
-		String [] data = {peak_date, peak_value.toString()};
 		return data;
 	}
 	
@@ -67,13 +67,14 @@ public class StatisticsCalculator {
 		
 		Integer peak_value = 0;
 		String peak_date = "2020/01/01";  //initializing with random value
-		String [] data = null;
+		String [] data = new String[2];
 		for (Map.Entry<LocalDate,Integer> record : countFootFallForEveryDate.entrySet()) {
 			if(record.getKey().getMonthValue() == month)
 			{
-				data = getPeakData(record, year, peak_value, peak_date);
-				peak_value = Integer.parseInt(data[1]);
+				data = getPeakData(record, year,peak_date, peak_value);
 				peak_date = data[0];
+				peak_value = Integer.parseInt(data[1]);
+				
 			}
 		}
 		footFallCsvWriter.writeRecordToCsv(data);
