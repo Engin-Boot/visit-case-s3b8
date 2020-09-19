@@ -1,6 +1,5 @@
 package visitcounter.receiver;
 
-import static org.hamcrest.CoreMatchers.any;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
@@ -12,13 +11,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import org.junit.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StatisticsCalculatorTest {

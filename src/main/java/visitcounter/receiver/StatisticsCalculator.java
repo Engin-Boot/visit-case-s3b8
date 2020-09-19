@@ -6,8 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.opencsv.CSVWriter;
-
 public class StatisticsCalculator {
 	
 	public static void calculateAverageFootfallsPerHourOverDay(List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
