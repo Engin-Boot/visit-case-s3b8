@@ -9,7 +9,7 @@ public class Main {
 		try {
 			FootFallCsvReader footFallCsvReader = new FootFallCsvReader();
 			
-			List<String> footfallRecords = footFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties());
+			List<String> footfallRecords = footFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties("filename"));
 			
 			IFootFallConsoleWriter consoleWriter = new FootFallConsoleWriter();
 			ConsoleWriterSimulatorLogic consoleWriterSimulatorLogic = new ConsoleWriterSimulatorLogic(consoleWriter);

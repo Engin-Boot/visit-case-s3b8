@@ -6,10 +6,9 @@ public class FootfallDataConsoleReader {
 		String line = "";
 //		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
 //			while((line = br.readLine())!=null) {
-//				FootFallRecordObjectStorer.storeFootFallRecordAsObject(line);
+//				footFallRecordObjectStorer.storeFootFallRecordAsObject(line);
 //			}
 //		} catch (IOException e) {
-//			e.printStackTrace();
 //			throw e;
 //		} 
 		

@@ -18,9 +18,13 @@ public class FootFallCsvReader{
 			while((line = br.readLine())!=null) {
 				footfallData.add(line);
 			}
+			
 		} catch (IOException e) {
 			throw e;
 		} 
 		return footfallData;
 	}
+	
+	
+	
 }

@@ -33,8 +33,8 @@ public class Utility {
 	}
 	
 	
-	public static String getCsvOutputFilePathFromProperties(String filename) {	
-		String path = rb.getString(filename);
+	public static String getCsvOutputFilePathFromProperties(String key) {	
+		String path = rb.getString(key);
 		return path;
 	}
 	
