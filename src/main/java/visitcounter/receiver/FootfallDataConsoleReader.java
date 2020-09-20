@@ -1,22 +1,18 @@
 package visitcounter.receiver;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 public class FootfallDataConsoleReader {
 
-	public void readFootfalldataLinebyLineFromConsole(FootFallRecordObjectStorer footFallRecordObjectStorer) throws Exception{
+	public void readFootfalldataLinebyLineFromConsole(FootFallRecordObjectStorer footFallRecordObjectStorer, BufferedReader reader) throws Exception{
 		String line = "";
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
+		try(BufferedReader br = reader)  {
 			while((line = br.readLine())!=null) {
 				footFallRecordObjectStorer.storeFootFallRecordAsObject(line);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw e;
-		} 
-		
+		} 	
 	
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/01,08:03:50");
 //		footFallRecordObjectStorer.storeFootFallRecordAsObject("2020/01/02,08:03:50");
