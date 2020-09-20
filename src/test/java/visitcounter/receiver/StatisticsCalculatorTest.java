@@ -48,11 +48,13 @@ public class StatisticsCalculatorTest {
 	@Test
 	public void whenCalculateDailyFootfallsOverWeekThenThrowNoException() throws IOException
 	{
-		FootFallModel model1 = new FootFallModel(LocalDate.now(), LocalTime.now());
-		FootFallModel model2 = new FootFallModel(LocalDate.of(2020, 1, 1), LocalTime.of(6, 5, 30));
+		FootFallModel model1 = new FootFallModel(LocalDate.of(2020, 1, 1), LocalTime.of(6, 5, 30));
+		FootFallModel model2 = new FootFallModel(LocalDate.of(2020, 1, 1), LocalTime.of(6, 5, 40));
+		FootFallModel model3 = new FootFallModel(LocalDate.of(2020, 1, 2), LocalTime.of(6, 5, 30));
 		List<FootFallModel> listRecords = new ArrayList<FootFallModel>();
 		listRecords.add(model1);
 		listRecords.add(model2);
+		listRecords.add(model3);
 		
 		StatisticsCalculator.calculateDailyFootfallsOverWeek(listRecords, writer);
 		verify(writer, times(1)).createWriter(argumentCaptorFilePath.capture());
@@ -67,13 +69,15 @@ public class StatisticsCalculatorTest {
 	@Test
 	public void whenCalculatePeakDailyFootfallsInParticularMonthThenThrowNoException() throws IOException
 	{
-		FootFallModel model1 = new FootFallModel(LocalDate.of(2020, 1, 2), LocalTime.of(6, 5, 30));
-		FootFallModel model2 = new FootFallModel(LocalDate.of(2020, 1, 1), LocalTime.of(6, 5, 30));
+		FootFallModel model1 = new FootFallModel(LocalDate.of(2020, 1, 31), LocalTime.of(6, 5, 30));
+		FootFallModel model2 = new FootFallModel(LocalDate.of(2020, 2, 1), LocalTime.of(6, 5, 40));
+		FootFallModel model3 = new FootFallModel(LocalDate.of(2020, 2, 2), LocalTime.of(6, 5, 30));
 		List<FootFallModel> listRecords = new ArrayList<FootFallModel>();
 		listRecords.add(model1);
 		listRecords.add(model2);
+		listRecords.add(model3);
 		
-		StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(1, 2020, listRecords, writer);
+		StatisticsCalculator.calculatePeakDailyFootfallsInParticularMonth(2, 2020, listRecords, writer);
 		verify(writer, times(1)).createWriter(argumentCaptorFilePath.capture());
 		verify(writer, times(1)).writeColumnNamesToCsv(Matchers.<String>anyVararg());
 		verify(writer, times(1)).writeRecordToCsv(Matchers.<String>anyVararg());
@@ -85,8 +89,8 @@ public class StatisticsCalculatorTest {
 	@Test
 	public void whenCalculatePeakDailyFootfallsInLastMonthThenThrowNoException() throws IOException
 	{
-		FootFallModel model1 = new FootFallModel(LocalDate.of(2020, 1, 2), LocalTime.of(6, 5, 30));
-		FootFallModel model2 = new FootFallModel(LocalDate.of(2020, 1, 1), LocalTime.of(6, 5, 30));
+		FootFallModel model1 = new FootFallModel(LocalDate.of(2020, 1, 1), LocalTime.of(6, 5, 30));
+		FootFallModel model2 = new FootFallModel(LocalDate.of(2020, 1, 2), LocalTime.of(6, 5, 30));
 		List<FootFallModel> listRecords = new ArrayList<FootFallModel>();
 		listRecords.add(model1);
 		listRecords.add(model2);
