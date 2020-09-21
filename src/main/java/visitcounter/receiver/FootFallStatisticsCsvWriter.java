@@ -1,9 +1,10 @@
 package visitcounter.receiver;
 
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import com.opencsv.CSVWriter;
 
@@ -18,8 +19,9 @@ public class FootFallStatisticsCsvWriter implements IFootFallCsvWriter {
 	@Override
 	public void createWriter(String path) throws IOException {
 		try {
-			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
-			this.writer = new CSVWriter(outputStreamWriter);
+			//OutputStreamWriter outputStreamWriter = new OutputStreamWriter(Files.newOutputStream(Paths.get(path), StandardCharsets.UTF_8));
+			BufferedWriter writer = Files.newBufferedWriter(Paths.get(path), StandardCharsets.UTF_8);
+			this.writer = new CSVWriter(writer);
 		} catch (IOException e) {
 			throw e;
 		}
