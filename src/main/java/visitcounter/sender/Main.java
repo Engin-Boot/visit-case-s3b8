@@ -13,13 +13,10 @@ public class Main {
 		
 	public static void main(String[] args){
 		try {
-			String key = "filename";
-			if(args.length!=0 && args[0].equals("test_invalidfile")) {
-				key="filename_invalid";
-			}
+			String key = UtilitySender.checkIfValidKey(args);
 			checkMainIsExecutedSuccessfully = false;
 			FootFallCsvReader footFallCsvReader = new FootFallCsvReader();
-			List<String> footfallRecords = footFallCsvReader.readFootfalldataLinebyLinefromCsv(Utility.readCsvFileNameFromProperties(key));
+			List<String> footfallRecords = footFallCsvReader.readFootfalldataLinebyLinefromCsv(UtilitySender.readCsvFileNameFromProperties(key));
 			IFootFallConsoleWriter consoleWriter = new FootFallConsoleWriter();
 			ConsoleWriterSimulatorLogic consoleWriterSimulatorLogic = new ConsoleWriterSimulatorLogic(consoleWriter);
 			consoleWriterSimulatorLogic.sendFootFalldataInbunch(footfallRecords);

@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class Utility {
+public class UtilityReceiver {
 	
 	public static final ResourceBundle rb = ResourceBundle.getBundle("outputpaths");
 	

@@ -11,7 +11,7 @@ public class StatisticsCalculator {
 	public static void calculateAverageFootfallsPerHourOverDay(List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
 		//List<FootFallModel> footFallRecords = FootFallRecordObjectStorer.getFootFallRecords();
 		Map<String,Integer> countFootFallForEveryWorkingHour = getMapCountNoOfFootfallsForEveryWorkingHour(footFallRecords);
-		footFallCsvWriter.createWriter(Utility.getCsvOutputFilePathFromProperties("filename1"));
+		footFallCsvWriter.createWriter(UtilityReceiver.getCsvOutputFilePathFromProperties("filename1"));
 		
 		String [] column_names = {"Working Hour", "Average Foot Fall Per Hour"};
 		
@@ -30,7 +30,7 @@ public class StatisticsCalculator {
 		Map<String,Integer> countFootFallPerDayOfWeek = getMapCountFootFallsPerDayOfWeek(footFallRecords);
 		Map<String,Integer> countNoOfOccurencesOfDaysOfWeek = getMapCountNoOfOccurencesOfDaysOfWeek(footFallRecords);
 
-		footFallCsvWriter.createWriter(Utility.getCsvOutputFilePathFromProperties("filename2"));
+		footFallCsvWriter.createWriter(UtilityReceiver.getCsvOutputFilePathFromProperties("filename2"));
 		
 		String [] column_names = {"Day of Week", "Daily Foot Falls Over Week "};
 		
@@ -59,7 +59,7 @@ public class StatisticsCalculator {
 	public static void calculatePeakDailyFootfallsInParticularMonth(int month, int year, List<FootFallModel> footFallRecords, IFootFallCsvWriter footFallCsvWriter) throws IOException {
 		Map<LocalDate,Integer> countFootFallForEveryDate = getMapCountFootFallsForEveryDate(footFallRecords);
 		
-		footFallCsvWriter.createWriter(Utility.getCsvOutputFilePathFromProperties("filename3"));
+		footFallCsvWriter.createWriter(UtilityReceiver.getCsvOutputFilePathFromProperties("filename3"));
 		
 		String [] column_names = {"Date", "Peak FootFall for current month"};
 		
@@ -121,7 +121,7 @@ public class StatisticsCalculator {
 
 	private static Map<String,Integer> getMapCountNoOfFootfallsForEveryWorkingHour(List<FootFallModel> footFallRecords){
 		Map<String,Integer> countNoOfFootfallsForEveryWorkingHours = new LinkedHashMap<>();
-		int [] working_hour = Utility.getWorkingHourOFaDay();
+		int [] working_hour = UtilityReceiver.getWorkingHourOFaDay();
 		int opening_time = working_hour[0];
 		int closing_time = working_hour[1];
 		for(int i = opening_time; i <= closing_time; i++) {

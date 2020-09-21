@@ -14,8 +14,8 @@ public class FootFallRecordObjectStorer {
 	
 	public void storeFootFallRecordAsObject(String record) throws Exception{
 		try {
-			String [] arrayWithDateTime = Utility.splitDatabyComma(record);
-			footFallRecords.add(new FootFallModel(Utility.convertStringToDate(arrayWithDateTime[0]), Utility.convertStringToTime(arrayWithDateTime[1])));
+			String [] arrayWithDateTime = UtilityReceiver.splitDatabyComma(record);
+			footFallRecords.add(new FootFallModel(UtilityReceiver.convertStringToDate(arrayWithDateTime[0]), UtilityReceiver.convertStringToTime(arrayWithDateTime[1])));
 		} 
 		catch(DateTimeParseException | ArrayIndexOutOfBoundsException e) {
 			throw e;
